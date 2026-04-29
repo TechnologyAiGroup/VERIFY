@@ -1,0 +1,15 @@
+numba==0.56.4
+GraphRicciCurvature==0.5.3.1
+attrdict==2.0.1
+matplotlib==3.5.3
+networkx==2.8.6
+pandas==1.4.4
+pyparsing==3.0.9
+pytz==2022.2.1
+scikit-learn==1.1.2
+scipy==1.9.1
+threadpoolctl==3.1.0
+torch-geometric==2.1.0.post1
+torch-scatter==2.0.9
+torch-sparse==0.6.15
+tqdm==4.64.1
