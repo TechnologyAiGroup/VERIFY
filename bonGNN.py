@@ -11,8 +11,8 @@ class BernsteinConv(nn.Module):
     def __init__(self,
                  in_feats,
                  out_feats,
-                 k,  # 滤波器索引k=0,1,2
-                 n=2, # 固定n=2
+                 k,  
+                 n=2,
                  activation=F.leaky_relu,
                  lin=False,
                  bias=False):
@@ -37,7 +37,6 @@ class BernsteinConv(nn.Module):
             D_invsqrt = torch.pow(graph.in_degrees().float().clamp(
                 min=1), -0.5).unsqueeze(-1).to(feat.device)
             
-            # 关键修改：使用消息传递代替矩阵乘法
             h = feat.clone()
             
             if self._k == 0:  # (1-x)^n
@@ -55,7 +54,7 @@ class BernsteinConv(nn.Module):
                 for _ in range(self._n - self._k):
                     h_part = unnLaplacian(h_part, D_invsqrt, graph) / 2  # x = L/2
                     h_part = feat - h_part  # I - x
-                h = temp * h_part  # 逐元素乘法
+                h = temp * h_part
             
             h = self.comb * h
 
@@ -70,7 +69,7 @@ class BWGNN(nn.Module):
         super(BWGNN, self).__init__()
         self.g = graph
         self.n = 2
-        # 创建3个伯恩斯坦滤波器 (k=0,1,2)
+
         self.conv = nn.ModuleList([
             BernsteinConv(h_feats, h_feats, k=0, n=2, lin=False),
             BernsteinConv(h_feats, h_feats, k=1, n=2, lin=False),
@@ -78,7 +77,7 @@ class BWGNN(nn.Module):
         ])
         self.linear = nn.Linear(in_feats, h_feats)
         self.linear2 = nn.Linear(h_feats, h_feats)
-        self.linear3 = nn.Linear(h_feats * len(self.conv), h_feats)  # 输入维度是h_feats*3
+        self.linear3 = nn.Linear(h_feats * len(self.conv), h_feats)
         self.linear4 = nn.Linear(h_feats, num_classes)
         self.act = nn.ReLU()
 
@@ -88,7 +87,6 @@ class BWGNN(nn.Module):
         h = self.linear2(h)
         h = self.act(h)
         
-        # 并行计算三个滤波器的输出
         h_final = torch.cat([conv(self.g, h) for conv in self.conv], dim=-1)
         
         h = self.linear3(h_final)
@@ -97,11 +95,9 @@ class BWGNN(nn.Module):
         return h
 
     def testlarge(self, g, in_feat):
-        # 与forward相同，用于测试大图
         return self.forward(in_feat)
 
     def batch(self, blocks, in_feat):
-        # 批处理版本（需根据实际需求实现）
         h = self.linear(in_feat)
         h = self.act(h)
         h = self.linear2(h)

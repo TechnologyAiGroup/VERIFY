@@ -34,7 +34,6 @@ class Dataset:
                 diff = anomaly_alpha * len(label) - len(anomaly_id)
                 import random
                 new_id = random.sample(normal_id, int(diff))
-                # new_id = random.sample(anomaly_id, int(diff))
                 for idx in new_id:
                     aid = random.choice(anomaly_id)
                     # aid = random.choice(normal_id)

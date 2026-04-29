@@ -135,7 +135,6 @@ class BWGNN(nn.Module):
         for conv in self.conv:
             h0 = conv(self.g, h)
             h_final = torch.cat([h_final, h0], -1)
-            # print(h_final.shape)
         h = self.linear3(h_final)
         h = self.act(h)
         h = self.linear4(h)
@@ -150,7 +149,6 @@ class BWGNN(nn.Module):
         for conv in self.conv:
             h0 = conv(g, h)
             h_final = torch.cat([h_final, h0], -1)
-            # print(h_final.shape)
         h = self.linear3(h_final)
         h = self.act(h)
         h = self.linear4(h)
@@ -166,7 +164,6 @@ class BWGNN(nn.Module):
         for conv in self.conv:
             h0 = conv(blocks[0], h)
             h_final = torch.cat([h_final, h0], -1)
-            # print(h_final.shape)
         h = self.linear3(h_final)
         h = self.act(h)
         h = self.linear4(h)

@@ -46,7 +46,6 @@ def train(model, g, args,node_lens,key_ids,key_label,train_ids,val_ids):
         model.train()
         logits = model(features)
         print(logits.shape)
-#         loss = F.cross_entropy(logits[train_mask], labels[train_mask], weight=torch.tensor([1., weight]))
         loss = F.cross_entropy(logits[train_ids], labels[train_ids], weight=torch.tensor([1., weight]))
         optimizer.zero_grad()
         loss.backward()
@@ -58,8 +57,6 @@ def train(model, g, args,node_lens,key_ids,key_label,train_ids,val_ids):
         preds = numpy.zeros_like(labels)
         preds[probs[:, 1] > thres] = 1
         
-        
-        # 获取测试集的预测结果和概率值
         test_preds = preds[test_mask]
         print(test_preds)
 
