@@ -54,8 +54,6 @@ Circuit rewiring module based on Ollivier-Ricci curvature. This module performs 
 - **Circuit Support**: Supports various benchmark circuits (b11, b14, b17, c1355, c1908, c2670, c3540, c6288, etc.)
 - **Data Processing**: Converts between different graph data formats and applies rewiring transformations
 
-For detailed usage, see [rewire/README_netlists.md](rewire/README_netlists.md).
-
 ## Dependencies
 
 ### Core Model
