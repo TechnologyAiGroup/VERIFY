@@ -1,6 +1,6 @@
-# GOLD: Graph Anomaly-based Logic Locking Deciphering
+#  VERIFY: Key Assumption Validation and Spectral Graph Learning for Oracle-Less Logic Unlocking
 
-This is the implementation for Graph Anomaly-based Logic Locking Deciphering.
+This is the implementation for the VERIFY research project.
 
 ## Project Structure
 
@@ -72,7 +72,7 @@ Circuit rewiring module based on Ollivier-Ricci curvature. This module performs 
 
 ## How to Run
 
-### Main Model (GOLD)
+### Main Model (VERIFY)
 
 ```bash
 python main.py --dataset amazon --train_ratio 0.4 --hid_dim 64 \
@@ -121,5 +121,5 @@ python run_netlists_rewire.py \
 
 ## Acknowledgement
 
-The band-pass filter implementation in GOLD utilizes the beta-wavelet codes from the following paper: J. Tang, J. Li, Z. Gao, and J. Li, Rethinking graph neural networks for anomaly detection, ICML 2022. Thanks to the authors for making their code available.
+The band-pass filter implementation in VERIFY utilizes the beta-wavelet codes from the following paper: J. Tang, J. Li, Z. Gao, and J. Li, Rethinking graph neural networks for anomaly detection, ICML 2022. Thanks to the authors for making their code available.
 
